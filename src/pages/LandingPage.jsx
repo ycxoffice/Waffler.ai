@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import {
   Bookmark,
   Mic,
@@ -10,7 +11,6 @@ import {
   ArrowRight,
   Play,
   Plus,
-  Heart,
   MessageSquare,
   Share2,
   Layers,
@@ -212,9 +212,9 @@ const WafflerAILanding = () => {
               all in one powerful, AI-driven database.
             </p>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-              <button className="w-full sm:w-auto px-8 py-4 rounded-full bg-gradient-to-r from-purple-600 to-indigo-600 text-white font-medium hover:shadow-lg transition-shadow">
+              <Link to={'/companies'} className="w-full sm:w-auto px-8 py-4 rounded-full bg-gradient-to-r from-purple-600 to-indigo-600 text-white font-medium hover:shadow-lg transition-shadow">
                 Start Free Trial
-              </button>
+              </Link>
               <button className="w-full sm:w-auto px-8 py-4 rounded-full border border-gray-300 flex items-center justify-center text-gray-700 font-medium hover:bg-gray-50 transition-colors">
                 <Play className="h-4 w-4 mr-2" />
                 Watch Demo
