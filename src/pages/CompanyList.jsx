@@ -1,3 +1,4 @@
+//waffler company list
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import {
@@ -26,14 +27,14 @@ function CompanyList() {
   const [showFilters, setShowFilters] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
-  
-    useEffect(() => {
-      const handleScroll = () => {
-        setScrolled(window.scrollY > 30);
-      };
-      window.addEventListener("scroll", handleScroll);
-      return () => window.removeEventListener("scroll", handleScroll);
-    }, []);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 30);
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -72,14 +73,6 @@ function CompanyList() {
     fetchData();
   }, []);
 
-  // Get unique exchanges and sectors for filters
-  const exchanges = [
-    ...new Set(companies.map((company) => company["Exchange"] || "")),
-  ].filter(Boolean);
-  const sectors = [
-    ...new Set(companies.map((company) => company["Sector"] || "")),
-  ].filter(Boolean);
-
   // Filter companies based on search term and filters
   const filteredCompanies = companies.filter((company) => {
     const matchesSearch =
@@ -89,19 +82,8 @@ function CompanyList() {
       company["Industry"]?.toLowerCase().includes(searchTerm.toLowerCase()) ||
       company["Headquarters"]?.toLowerCase().includes(searchTerm.toLowerCase());
 
-    const matchesExchange =
-      selectedExchange === "" || company["Exchange"] === selectedExchange;
-    const matchesSector =
-      selectedSector === "" || company["Sector"] === selectedSector;
-
-    return matchesSearch && matchesExchange && matchesSector;
+    return matchesSearch;
   });
-
-   const [isVisible, setIsVisible] = useState(false);
-  
-    useEffect(() => {
-      setIsVisible(true);
-    }, []);
 
   if (loading)
     return (
@@ -238,56 +220,60 @@ function CompanyList() {
 
       {/* Hero Section with Gradient */}
       <div className="relative overflow-hidden py-24">
-        {/* <div className="absolute inset-0 bg-[url('/api/placeholder/1000/1000')] opacity-5 bg-fixed"></div>
-        <div className="absolute top-1/2 -translate-y-1/2 left-1/2 -translate-x-1/2 w-96 h-96 bg-pink-500 rounded-full filter blur-[150px] opacity-20"></div>
-        <div className="absolute top-1/3 -translate-y-1/2 right-1/4 -translate-x-1/2 w-64 h-64 bg-blue-500 rounded-full filter blur-[150px] opacity-10"></div> */}
-
         <div className="container mx-auto px-4 relative z-10">
           <div className="max-w-4xl mx-auto">
-          <div className="max-w-4xl mx-auto text-center mb-12">
-            <h1 className="text-4xl md:text-6xl font-bold leading-tight mb-6">
-              The Ultimate Database for
-              <span className="block mt-2 bg-clip-text text-transparent bg-gradient-to-r from-purple-600 to-indigo-600">
-                Content Creators & Media Companies
-              </span>
-            </h1>
-            <p className="text-xl text-gray-600 mb-8 max-w-2xl mx-auto">
-              Discover what works in content, publishing, media, and social -
-              all in one powerful, AI-driven database.
-            </p>
-            <div className="mt-10 flex justify-center space-x-8 text-sm text-gray-500">
-              <div className="flex items-center">
-                <div className="w-2 h-2 rounded-full bg-green-400 mr-2"></div>
-                No credit card required
-              </div>
-              <div className="flex items-center">
-                <div className="w-2 h-2 rounded-full bg-green-400 mr-2"></div>
-                14-day free trial
-              </div>
-              <div className="flex items-center">
-                <div className="w-2 h-2 rounded-full bg-green-400 mr-2"></div>
-                Cancel anytime
+            <div className="max-w-4xl mx-auto text-center mb-12">
+              <h1 className="text-4xl md:text-6xl font-bold leading-tight mb-6">
+                The Ultimate Database for
+                <span className="block mt-2 bg-clip-text text-transparent bg-gradient-to-r from-purple-600 to-indigo-600">
+                  Content Creators & Media Companies
+                </span>
+              </h1>
+              <p className="text-xl text-gray-600 mb-8 max-w-2xl mx-auto">
+                Discover what works in content, publishing, media, and social -
+                all in one powerful, AI-driven database.
+              </p>
+              <div className="mt-10 flex justify-center space-x-8 text-sm text-gray-500">
+                <div className="flex items-center">
+                  <div className="w-2 h-2 rounded-full bg-green-400 mr-2"></div>
+                  No credit card required
+                </div>
+                <div className="flex items-center">
+                  <div className="w-2 h-2 rounded-full bg-green-400 mr-2"></div>
+                  14-day free trial
+                </div>
+                <div className="flex items-center">
+                  <div className="w-2 h-2 rounded-full bg-green-400 mr-2"></div>
+                  Cancel anytime
+                </div>
               </div>
             </div>
-          </div>
 
             {/* Stats Cards */}
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-12">
               <div className="bg-gradient-to-br from-gray-800 to-gray-900 p-6 rounded-lg border border-gray-700 backdrop-blur-sm">
                 <p className="text-gray-400 mb-2 text-sm">Average Growth</p>
-                <p className="text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-purple-600 to-pink-600">+127%</p>
+                <p className="text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-purple-600 to-pink-600">
+                  +127%
+                </p>
               </div>
               <div className="bg-gradient-to-br from-gray-800 to-gray-900 p-6 rounded-lg border border-gray-700 backdrop-blur-sm">
                 <p className="text-gray-400 mb-2 text-sm">Companies Tracked</p>
-                <p className="text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-purple-600 to-pink-600">500+</p>
+                <p className="text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-purple-600 to-pink-600">
+                  500+
+                </p>
               </div>
               <div className="bg-gradient-to-br from-gray-800 to-gray-900 p-6 rounded-lg border border-gray-700 backdrop-blur-sm">
                 <p className="text-gray-400 mb-2 text-sm">Success Rate</p>
-                <p className="text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-purple-600 to-pink-600">84%</p>
+                <p className="text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-purple-600 to-pink-600">
+                  84%
+                </p>
               </div>
               <div className="bg-gradient-to-br from-gray-800 to-gray-900 p-6 rounded-lg border border-gray-700 backdrop-blur-sm">
                 <p className="text-gray-400 mb-2 text-sm">Daily Updates</p>
-                <p className="text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-purple-600 to-pink-600">24/7</p>
+                <p className="text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-purple-600 to-pink-600">
+                  24/7
+                </p>
               </div>
             </div>
 
@@ -307,77 +293,6 @@ function CompanyList() {
                       onChange={(e) => setSearchTerm(e.target.value)}
                     />
                   </div>
-
-                  <div className="flex justify-between items-center">
-                    <button
-                      onClick={() => setShowFilters(!showFilters)}
-                      className="flex items-center text-gray-400 hover:text-green-500 text-sm font-medium transition-colors"
-                    >
-                      <Filter className="h-4 w-4 mr-1" />
-                      Filters
-                      <ChevronDown
-                        className={`h-4 w-4 ml-1 transition-transform ${
-                          showFilters ? "rotate-180" : ""
-                        }`}
-                      />
-                    </button>
-
-                    <div className="text-gray-500 text-sm">
-                      {filteredCompanies.length} companies found
-                    </div>
-                  </div>
-
-                  {showFilters && (
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-2 border-t border-gray-800 pt-4 animate-fadeIn">
-                      <div className="relative">
-                        <label className="block text-sm font-medium text-gray-400 mb-1">
-                          Exchange
-                        </label>
-                        <div className="relative">
-                          <select
-                            className="w-full pl-3 pr-10 py-2 bg-gray-800 border border-gray-700 rounded-lg appearance-none focus:outline-none focus:ring-2 focus:ring-green-500 text-white"
-                            value={selectedExchange}
-                            onChange={(e) =>
-                              setSelectedExchange(e.target.value)
-                            }
-                          >
-                            <option value="">All Exchanges</option>
-                            {exchanges.map((exchange, idx) => (
-                              <option key={idx} value={exchange}>
-                                {exchange}
-                              </option>
-                            ))}
-                          </select>
-                          <div className="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
-                            <ChevronDown className="h-4 w-4 text-gray-400" />
-                          </div>
-                        </div>
-                      </div>
-
-                      <div className="relative">
-                        <label className="block text-sm font-medium text-gray-400 mb-1">
-                          Sector
-                        </label>
-                        <div className="relative">
-                          <select
-                            className="w-full pl-3 pr-10 py-2 bg-gray-800 border border-gray-700 rounded-lg appearance-none focus:outline-none focus:ring-2 focus:ring-green-500 text-white"
-                            value={selectedSector}
-                            onChange={(e) => setSelectedSector(e.target.value)}
-                          >
-                            <option value="">All Sectors</option>
-                            {sectors.map((sector, idx) => (
-                              <option key={idx} value={sector}>
-                                {sector}
-                              </option>
-                            ))}
-                          </select>
-                          <div className="absolute inset-y-0 right-0 pr-3 flex items-center pointer-events-none">
-                            <ChevronDown className="h-4 w-4 text-gray-400" />
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  )}
                 </div>
               </div>
             </div>
@@ -609,8 +524,6 @@ function CompanyList() {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-         
-
             <div className="bg-gradient-to-br from-white-800 to-white-400 p-8 rounded-xl border border-purple-700 backdrop-blur-sm relative group hover:border-purple-500/50 transition-all">
               {/* <div className="absolute top-0 right-0 w-24 h-24 bg-green-500 rounded-full filter blur-[80px] opacity-10 group-hover:opacity-20 transition-opacity"></div> */}
 
@@ -618,11 +531,11 @@ function CompanyList() {
                 <AlertTriangle className="h-6 w-6" />
               </div>
               <h3 className="text-xl text-gray-700 font-bold mb-4 group-hover:text-purple-400 transition-colors">
-              Market Analytics
+                Market Analytics
               </h3>
               <p className="text-gray-400">
-              Real-time valuation tracking and market performance metrics to
-              keep you informed of every market movement.
+                Real-time valuation tracking and market performance metrics to
+                keep you informed of every market movement.
               </p>
               <div className="mt-6 pt-6 border-t border-gray-700">
                 <a
@@ -657,8 +570,8 @@ function CompanyList() {
                 Growth Score
               </h3>
               <p className="text-gray-400">
-              Proprietary AI-driven growth potential scoring system that
-              predicts future market performance with remarkable accuracy.
+                Proprietary AI-driven growth potential scoring system that
+                predicts future market performance with remarkable accuracy.
               </p>
               <div className="mt-6 pt-6 border-t border-gray-700">
                 <a

@@ -17,7 +17,6 @@ import {
 } from "lucide-react";
 
 const WafflerAILanding = () => {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [activeTab, setActiveTab] = useState("content");
   const [scrolled, setScrolled] = useState(false);
 
@@ -99,103 +98,9 @@ const WafflerAILanding = () => {
                 Waffler.ai
               </span>
             </div>
-
-            {/* Desktop Menu */}
-            <div className="hidden md:flex space-x-8">
-              <a
-                href="#content"
-                className="text-gray-600 hover:text-purple-600 transition-colors"
-              >
-                Content
-              </a>
-              <a
-                href="#publishing"
-                className="text-gray-600 hover:text-purple-600 transition-colors"
-              >
-                Publishing
-              </a>
-              <a
-                href="#media"
-                className="text-gray-600 hover:text-purple-600 transition-colors"
-              >
-                Media
-              </a>
-              <a
-                href="#social"
-                className="text-gray-600 hover:text-purple-600 transition-colors"
-              >
-                Social
-              </a>
-            </div>
-
-            <div className="hidden md:flex items-center space-x-4">
-              <button className="px-4 py-2 rounded-full bg-gray-100 text-gray-700 hover:bg-gray-200 transition-colors">
-                Log in
-              </button>
-              <button className="px-4 py-2 rounded-full bg-gradient-to-r from-purple-600 to-indigo-600 text-white hover:opacity-90 transition-opacity">
-                Try for free
-              </button>
-            </div>
-
-            {/* Mobile menu button */}
-            <button className="md:hidden" onClick={() => setIsMenuOpen(true)}>
-              <Menu className="h-6 w-6 text-gray-700" />
-            </button>
           </div>
         </div>
       </nav>
-
-      {/* Mobile Menu */}
-      {isMenuOpen && (
-        <div className="fixed inset-0 bg-white z-50 md:hidden">
-          <div className="flex justify-between items-center p-6 border-b">
-            <span className="text-xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-purple-600 to-indigo-600">
-              Waffler.ai
-            </span>
-            <button onClick={() => setIsMenuOpen(false)}>
-              <X className="h-6 w-6 text-gray-700" />
-            </button>
-          </div>
-          <div className="p-6 flex flex-col space-y-4">
-            <a
-              href="#content"
-              className="py-2 text-gray-800"
-              onClick={() => setIsMenuOpen(false)}
-            >
-              Content
-            </a>
-            <a
-              href="#publishing"
-              className="py-2 text-gray-800"
-              onClick={() => setIsMenuOpen(false)}
-            >
-              Publishing
-            </a>
-            <a
-              href="#media"
-              className="py-2 text-gray-800"
-              onClick={() => setIsMenuOpen(false)}
-            >
-              Media
-            </a>
-            <a
-              href="#social"
-              className="py-2 text-gray-800"
-              onClick={() => setIsMenuOpen(false)}
-            >
-              Social
-            </a>
-            <div className="pt-4 flex flex-col space-y-3">
-              <button className="w-full py-3 rounded-full bg-gray-100 text-gray-700">
-                Log in
-              </button>
-              <button className="w-full py-3 rounded-full bg-gradient-to-r from-purple-600 to-indigo-600 text-white">
-                Try for free
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
 
       {/* Hero Section */}
       <section className="pt-36 pb-20 px-6">
@@ -212,13 +117,12 @@ const WafflerAILanding = () => {
               all in one powerful, AI-driven database.
             </p>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-              <Link to={'/companies'} className="w-full sm:w-auto px-8 py-4 rounded-full bg-gradient-to-r from-purple-600 to-indigo-600 text-white font-medium hover:shadow-lg transition-shadow">
+              <Link
+                to={"/companies"}
+                className="w-full sm:w-auto px-8 py-4 rounded-full bg-gradient-to-r from-purple-600 to-indigo-600 text-white font-medium hover:shadow-lg transition-shadow"
+              >
                 Start Free Trial
               </Link>
-              <button className="w-full sm:w-auto px-8 py-4 rounded-full border border-gray-300 flex items-center justify-center text-gray-700 font-medium hover:bg-gray-50 transition-colors">
-                <Play className="h-4 w-4 mr-2" />
-                Watch Demo
-              </button>
             </div>
             <div className="mt-10 flex justify-center space-x-8 text-sm text-gray-500">
               <div className="flex items-center">
